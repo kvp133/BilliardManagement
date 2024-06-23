@@ -1,0 +1,182 @@
+﻿<Window x:Class="BilliardManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BilliardManagement"
+        mc:Ignorable="d"
+        xmlns:uc="clr-namespace:BilliardManagement.Views"
+        Name="mainWindow"
+       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        Style="{StaticResource MaterialDesignWindow}"
+        Title="Billiard Management" Height="450" Width="800"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+     DataContext="{StaticResource MainVM}"
+        
+        >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--Menu-->
+        <Grid Grid.Row="0">
+            <uc:MenuControll></uc:MenuControll>
+        </Grid>
+        <!--Main-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Dashboard total revenue today, total table availible, total table occtupied-->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <materialDesign:Card Margin="5" Background="#447c13" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <StackPanel>
+                            <TextBlock  Margin="16,16,16,4" Text="Total Revenue Today"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
+                            <TextBlock Text="{Binding TotalRevenueToday}" FontWeight="Bold" FontSize="20"></TextBlock>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <materialDesign:Card  Margin="5" Background="#447c13" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <StackPanel>
+                            <TextBlock  Margin="16,16,16,4" Text="Total Table Available" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
+                            <TextBlock Text="{Binding TotalTableAvailable}" FontWeight="Bold" FontSize="20"></TextBlock>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <materialDesign:Card Margin="5" Background="#447c13" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                        <StackPanel>
+                            <TextBlock  Margin="16,16,16,4" Text="Total Table Occupied"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White"/>
+                            <TextBlock Text="{Binding TotalTableOccupied}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                        </StackPanel>
+                    </materialDesign:Card>
+                </Grid>
+            </Grid>
+           
+            <!--Filter-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <ListBox
+  x:Name="RadioButtonGroupChoiceChip"
+  Style="{StaticResource MaterialDesignChoiceChipListBox}"
+ >
+                        <ListBoxItem
+    Content="Occupied" />
+                        <ListBoxItem
+    Content="All"
+    IsSelected="True" />
+                        <ListBoxItem
+    Content="Maintenance" />
+                        <ListBoxItem
+    Content="Available"
+     />
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0"></Grid>
+                    <Grid Grid.Column="1">
+                        <ComboBox
+ materialDesign:ComboBoxAssist.MaxLength="2"
+ materialDesign:HintAssist.Hint="Search"
+ materialDesign:HintAssist.HintOpacity=".26"
+ IsEditable="True"
+>
+
+                        </ComboBox>
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+           
+
+            <!--List-->
+            <Grid Grid.Row="2">
+
+                <ListView ItemsSource="{Binding Dashboard}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Table.TableId}" Width="50"/>
+                            <GridViewColumn Header="Table" DisplayMemberBinding="{Binding Table.TableNumber}" Width="150"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Table.Status}" Width="100"/>
+                            <GridViewColumn Header="Total Price" DisplayMemberBinding="{Binding totalPrice}" Width="150"/>
+                            <GridViewColumn Header="Action" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ContentControl Content="{Binding}">
+                                            <ContentControl.Style>
+                                                <Style TargetType="ContentControl">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Table.Status}" Value="Occupied">
+                                                            <Setter Property="ContentTemplate">
+                                                                <Setter.Value>
+                                                                    <DataTemplate>
+                                                                        <Button Content="Calculate" Command="{Binding DataContext.CalculateCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                                                                    </DataTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Table.Status}" Value="Available">
+                                                            <Setter Property="ContentTemplate">
+                                                                <Setter.Value>
+                                                                    <DataTemplate>
+                                                                        <Button Content="Turn on" Command="{Binding DataContext.TurnOnCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding}" />
+                                                                    </DataTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Table.Status}" Value="Maintenance">
+                                                            <Setter Property="ContentTemplate">
+                                                                <Setter.Value>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Text="Maintenance" />
+
+                                                                    </DataTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </ContentControl.Style>
+                                        </ContentControl>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

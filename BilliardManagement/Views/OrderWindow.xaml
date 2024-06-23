@@ -1,0 +1,92 @@
+﻿<Window x:Class="BilliardManagement.Views.OrderWindow"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+   xmlns:local="clr-namespace:BilliardManagement"
+         xmlns:uc="clr-namespace:BilliardManagement.Views"
+   mc:Ignorable="d"
+   Style="{StaticResource MaterialDesignWindow}"
+   Title="Manager Order" Height="450" Width="800"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+TextElement.FontWeight="Regular"
+TextElement.FontSize="13"
+TextOptions.TextFormattingMode="Ideal"
+TextOptions.TextRenderingMode="Auto"
+Background="{DynamicResource MaterialDesignPaper}"
+FontFamily="{DynamicResource MaterialDesignFont}"
+DataContext="{StaticResource MainVM}">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--Menu-->
+            <Grid Grid.Row="0">
+                <uc:MenuControll></uc:MenuControll>
+            </Grid>
+
+            <!--các element binding từ selected item-->
+            <materialDesign:Card Grid.Row="1" Margin="5">
+                <WrapPanel Margin="0 0 0 10">
+                    <ComboBox  SelectedItem="{Binding SelectedTable, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Table" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
+                        <ComboBoxItem>
+                            <ComboBoxItem.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TableNumber}"></TextBlock>
+                                    <TextBlock Text=" - "></TextBlock>
+                                    <TextBlock Text="{Binding Status}"></TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.Content>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox  SelectedItem="{Binding SelectedProduct, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Product" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
+                        <ComboBoxItem>
+                            <ComboBoxItem.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ProductName}"></TextBlock>
+                                    <TextBlock Text=" - "></TextBlock>
+                                    <TextBlock Text="{Binding Price}"></TextBlock>
+                                </StackPanel>
+                            </ComboBoxItem.Content>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Quantity" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                </WrapPanel>
+                
+
+
+    
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2" Margin="5">
+                <WrapPanel>
+                    <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
+                    <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="100"></Button>
+                    <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="100"></Button>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="3" Margin="5" VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Width="200" Header="Table" DisplayMemberBinding="{Binding TableNumber}"></GridViewColumn>
+                                <GridViewColumn Width="120" Header="Product" DisplayMemberBinding="{Binding ProductName}"></GridViewColumn>
+                                <GridViewColumn Width="200" Header="Price" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="Quantity" DisplayMemberBinding="{Binding Quantity}"></GridViewColumn>
+                                
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>

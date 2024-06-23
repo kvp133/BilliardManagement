@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="1.0.0" />
+    <PackageReference Include="Microsoft.entityframeworkcore.design" Version="8.0.6">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.entityframeworkcore.sqlserver" Version="8.0.6" />
+    <PackageReference Include="Microsoft.extensions.configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.extensions.configuration.json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
+  </ItemGroup>
+
+</Project>
