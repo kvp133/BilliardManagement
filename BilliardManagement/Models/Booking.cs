@@ -22,4 +22,9 @@ public partial class Booking
     public virtual Employee Employee { get; set; } = null!;
 
     public virtual Table Table { get; set; } = null!;
+
+    internal void SetEndTime(DateTime currentTime)
+    {
+        this.EndTime = currentTime;
+    }
 }

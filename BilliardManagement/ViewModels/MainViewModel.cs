@@ -43,13 +43,26 @@ namespace BilliardManagement.ViewModels
                 { 
                     p.Show();
                     loadDashboard();
-                    CalculateCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                CalculateCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                {
+                    Isloaded = true;
+
+                    // Find the current MainWindow instance and close it
+                    var currentMainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+                    if (currentMainWindow != null)
                     {
-                        Isloaded = true;
-                        MainWindow wd = new MainWindow();
-                        wd.ShowDialog();
+                        currentMainWindow.Close();
                     }
-              );
+
+                    // Execute the command
+                    ExecuteCalculateCommand(p);
+
+                    // Create and show a new instance of MainWindow
+                    MainWindow newMainWindow = new MainWindow();
+                    newMainWindow.Show();
+                });
+
+           
                     TurnOnCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                     {
                         Isloaded = true;
@@ -160,9 +173,22 @@ namespace BilliardManagement.ViewModels
         {
             if (parameter is Dashboard item)
             {
-                MessageBox.Show($"Total price for table {item.Table.TableNumber} is {item.totalPrice}");
+                //Update total price
+                DateTime currentTime = DateTime.Now;
+                var booking = DataProvider.Instance.DB.Bookings
+                                .FirstOrDefault(x => x.TableId == item.Table.TableId && x.EndTime == null);
+                item.Table.Status = "Available";
+
+                if (booking != null)
+                {
+                    booking.SetEndTime(currentTime);
+                    DataProvider.Instance.DB.Bookings.Update(booking);
+                    DataProvider.Instance.DB.Tables.Update(item.Table);
+                    DataProvider.Instance.DB.SaveChanges();
+                }
             }
         }
+
 
         private void ExecuteTurnOnCommand(object parameter)
         {
