@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\viewmodels\\tableviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\viewmodels\\tableviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\viewmodels\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\resourcexaml\\mainresource.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\resourcexaml\\mainresource.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\views\\tablewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\views\\tablewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\views\\managerproductwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\views\\managerproductwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\viewmodels\\employeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\viewmodels\\employeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\views\\manageremployeewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\views\\manageremployeewindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\fpt source\\billiard management\\billiardmanagement\\billiardmanagement\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,40 +42,77 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Employee.cs",
-              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Models\\Employee.cs",
-              "RelativeDocumentMoniker": "BilliardManagement\\Models\\Employee.cs",
-              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Models\\Employee.cs",
-              "RelativeToolTip": "BilliardManagement\\Models\\Employee.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T15:21:57.385Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "EmployeeViewModel.cs",
               "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ViewModels\\EmployeeViewModel.cs",
               "RelativeDocumentMoniker": "BilliardManagement\\ViewModels\\EmployeeViewModel.cs",
               "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ViewModels\\EmployeeViewModel.cs",
               "RelativeToolTip": "BilliardManagement\\ViewModels\\EmployeeViewModel.cs",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAAAG8AAAA3AAAA",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAACwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-25T15:10:49.729Z",
+              "WhenOpened": "2024-06-25T17:00:45.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ManagerProductWindow.xaml",
+              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Views\\ManagerProductWindow.xaml",
+              "RelativeDocumentMoniker": "BilliardManagement\\Views\\ManagerProductWindow.xaml",
+              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Views\\ManagerProductWindow.xaml",
+              "RelativeToolTip": "BilliardManagement\\Views\\ManagerProductWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-25T16:58:26.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TableWindow.xaml",
+              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Views\\TableWindow.xaml",
+              "RelativeDocumentMoniker": "BilliardManagement\\Views\\TableWindow.xaml",
+              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Views\\TableWindow.xaml",
+              "RelativeToolTip": "BilliardManagement\\Views\\TableWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-25T16:32:12.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainResource.xaml",
+              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ResourceXAML\\MainResource.xaml",
+              "RelativeDocumentMoniker": "BilliardManagement\\ResourceXAML\\MainResource.xaml",
+              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ResourceXAML\\MainResource.xaml",
+              "RelativeToolTip": "BilliardManagement\\ResourceXAML\\MainResource.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-25T16:31:20.048Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ManagerEmployeeWindow.xaml",
-              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Views\\ManagerEmployeeWindow.xaml",
-              "RelativeDocumentMoniker": "BilliardManagement\\Views\\ManagerEmployeeWindow.xaml",
-              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\Views\\ManagerEmployeeWindow.xaml",
-              "RelativeToolTip": "BilliardManagement\\Views\\ManagerEmployeeWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-25T15:10:04.52Z",
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ViewModels\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "BilliardManagement\\ViewModels\\ProductViewModel.cs",
+              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ViewModels\\ProductViewModel.cs",
+              "RelativeToolTip": "BilliardManagement\\ViewModels\\ProductViewModel.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAABwAAABqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-25T16:30:21.879Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TableViewModel.cs",
+              "DocumentMoniker": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ViewModels\\TableViewModel.cs",
+              "RelativeDocumentMoniker": "BilliardManagement\\ViewModels\\TableViewModel.cs",
+              "ToolTip": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\BilliardManagement\\ViewModels\\TableViewModel.cs",
+              "RelativeToolTip": "BilliardManagement\\ViewModels\\TableViewModel.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAiwDEAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-25T16:29:31.929Z",
               "EditorCaption": ""
             }
           ]

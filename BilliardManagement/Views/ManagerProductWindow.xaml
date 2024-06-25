@@ -16,7 +16,7 @@ TextOptions.TextFormattingMode="Ideal"
 TextOptions.TextRenderingMode="Auto"
 Background="{DynamicResource MaterialDesignPaper}"
 FontFamily="{DynamicResource MaterialDesignFont}"
-DataContext="{StaticResource MainVM}"
+DataContext="{StaticResource ProductVM}"
    >
     <Grid>
         <Grid>
@@ -27,9 +27,9 @@ DataContext="{StaticResource MainVM}"
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <!--Menu-->
-            <Grid Grid.Row="0">
+            <!--<Grid Grid.Row="0">
                 <uc:MenuControll></uc:MenuControll>
-            </Grid>
+            </Grid>-->
 
             <!--các element binding từ selected item-->
             <materialDesign:Card Grid.Row="1" Margin="5">
@@ -55,7 +55,7 @@ DataContext="{StaticResource MainVM}"
                     <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding ProductId}"></GridViewColumn>
                                 <GridViewColumn Width="200" Header="Product Name" DisplayMemberBinding="{Binding ProductName}"></GridViewColumn>
                                 <GridViewColumn Width="120" Header="Price" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
                                 <GridViewColumn Width="200" Header="Description" DisplayMemberBinding="{Binding Description}"></GridViewColumn>

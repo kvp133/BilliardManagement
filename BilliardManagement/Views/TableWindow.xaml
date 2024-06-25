@@ -16,7 +16,7 @@ TextOptions.TextFormattingMode="Ideal"
 TextOptions.TextRenderingMode="Auto"
 Background="{DynamicResource MaterialDesignPaper}"
 FontFamily="{DynamicResource MaterialDesignFont}"
-DataContext="{StaticResource MainVM}">
+DataContext="{StaticResource TableVM}">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -26,16 +26,20 @@ DataContext="{StaticResource MainVM}">
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <!--Menu-->
-            <Grid Grid.Row="0">
+            <!--<Grid Grid.Row="0">
                 <uc:MenuControll></uc:MenuControll>
-            </Grid>
+            </Grid>-->
 
             <!--các element binding từ selected item-->
             <materialDesign:Card Grid.Row="1" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
                     <TextBox Text="{Binding TableNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Table Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding HourlyRate, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Hourly Rate" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Status" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <ComboBox ItemsSource="{Binding ListStatus}"
+SelectedItem="{Binding StatusSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+Margin="5 5 15 5"
+materialDesign:HintAssist.Hint="Status"
+Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                 </WrapPanel>
             </materialDesign:Card>
 
@@ -52,7 +56,7 @@ DataContext="{StaticResource MainVM}">
                     <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding TableId}"></GridViewColumn>
                                 <GridViewColumn Width="200" Header="Table Number" DisplayMemberBinding="{Binding TableNumber}"></GridViewColumn>
                                 <GridViewColumn Width="150" Header="Hourly Rate" DisplayMemberBinding="{Binding HourlyRate}"></GridViewColumn>
                                 <GridViewColumn Width="200" Header="Status" DisplayMemberBinding="{Binding Status}"></GridViewColumn>
