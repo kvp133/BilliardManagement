@@ -19,6 +19,7 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
      DataContext="{StaticResource MainVM}"
+      WindowStartupLocation="CenterScreen"
         
         >
     <i:Interaction.Triggers>
@@ -53,24 +54,24 @@
                 <Grid Grid.Column="0">
                     <materialDesign:Card Margin="5" Background="#447c13" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                         <StackPanel>
-                            <TextBlock  Margin="16,16,16,4" Text="Total Revenue Today"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
-                            <TextBlock Text="{Binding TotalRevenueToday}" FontWeight="Bold" FontSize="20"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center"  Margin="16,16,16,4" Text="Total Revenue Today"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding TotalRevenueToday}" FontWeight="Bold" FontSize="20" Foreground="White" ></TextBlock>
                         </StackPanel>
                     </materialDesign:Card>
                 </Grid>
                 <Grid Grid.Column="1">
                     <materialDesign:Card  Margin="5" Background="#447c13" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                         <StackPanel>
-                            <TextBlock  Margin="16,16,16,4" Text="Total Table Available" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
-                            <TextBlock Text="{Binding TotalTableAvailable}" FontWeight="Bold" FontSize="20"></TextBlock>
+                            <TextBlock HorizontalAlignment="Center"  Margin="16,16,16,4" Text="Total Table Available" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding TotalTableAvailable}" FontWeight="Bold" FontSize="20" Foreground="White"></TextBlock>
                         </StackPanel>
                     </materialDesign:Card>
                 </Grid>
                 <Grid Grid.Column="2">
                     <materialDesign:Card Margin="5" Background="#447c13" Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
                         <StackPanel>
-                            <TextBlock  Margin="16,16,16,4" Text="Total Table Occupied"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White"/>
-                            <TextBlock Text="{Binding TotalTableOccupied}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                            <TextBlock HorizontalAlignment="Center"  Margin="16,16,16,4" Text="Total Table Occupied"  Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding TotalTableOccupied}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Foreground="White" />
                         </StackPanel>
                     </materialDesign:Card>
                 </Grid>
@@ -86,7 +87,16 @@
                     <ListBox
   x:Name="RadioButtonGroupChoiceChip"
   Style="{StaticResource MaterialDesignChoiceChipListBox}"
+                        
+     SelectedItem="{Binding SelectedStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"      
+      
  >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectionChangedCommand}" CommandParameter="{Binding SelectedItem, ElementName=RadioButtonGroupChoiceChip}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
                         <ListBoxItem
     Content="Occupied" />
                         <ListBoxItem

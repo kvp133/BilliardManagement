@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BilliardManagement.Properties;
+using System;
 using System.Collections.Generic;
 
 namespace BilliardManagement.Models;
@@ -20,4 +21,14 @@ public partial class Employee
     public string Role { get; set; } = null!;
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
+//Save Employee to User.settings
+public void SaveEmployee(Employee employee)
+{
+    User.Default.Id = employee.EmployeeId;
+    User.Default.Role = employee.Role;
+
+}
+  
+
 }

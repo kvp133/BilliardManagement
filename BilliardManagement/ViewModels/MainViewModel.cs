@@ -1,4 +1,5 @@
 ﻿using BilliardManagement.Models;
+using BilliardManagement.Properties;
 using BilliardManagement.Views;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace BilliardManagement.ViewModels
 {
@@ -19,15 +22,40 @@ namespace BilliardManagement.ViewModels
         public ICommand LoadedProduct { get; set; }
         public ICommand LoadedTable { get; set; }
         public ICommand LoadedOrders { get; set; }
+        public ICommand SelectionChangedCommand { get; set; }
         public ICommand LoadedHome { get; set; }
         public ICommand CalculateCommand { get; set; }
         public ICommand TurnOnCommand { get; set; }
+        private int _totalRevenueToday { get;set; }
+        public int TotalRevenueToday { get => _totalRevenueToday; set { _totalRevenueToday = value;OnPropertyChanged(); } }
+        private int _totalTableAvailable { get; set; }
+        public int TotalTableAvailable { get => _totalTableAvailable; set { _totalTableAvailable = value; OnPropertyChanged(); } }
+        private int _totalTableOccupied { get; set; }
+        public int TotalTableOccupied { get => _totalTableOccupied; set { _totalTableOccupied = value; OnPropertyChanged(); } }
+        private string _selectedStatus { get; set; }
+        public string SelectedStatus { get => _selectedStatus; set { _selectedStatus = value; OnPropertyChanged(); FilterTable(); } }
+        private DispatcherTimer _timer;
+
+
         private ObservableCollection<Dashboard> _Dashboard;
         public ObservableCollection<Dashboard> Dashboard { get => _Dashboard; set { _Dashboard = value; OnPropertyChanged(); } }
 
         // mọi thứ xử lý sẽ nằm trong này
         public MainViewModel()
         {
+            
+            _timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromMinutes(1) // Update every minute
+            };
+            _timer.Tick += (s, e) =>
+            {
+                ExecuteTotalRevenueToday();
+                ExcuteTotalTableAvailable();
+                ExcuteTotalTableOccupied();
+                FilterTable();
+            };
+            _timer.Start();
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 Isloaded = true;
@@ -39,35 +67,38 @@ namespace BilliardManagement.ViewModels
                 if (loginWindow.DataContext == null)
                     return;
                 var loginVM = loginWindow.DataContext as LoginViewModel;
+               
                 if (loginVM.IsLogin)
-                { 
-                    p.Show();
-                    loadDashboard();
-                CalculateCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                 {
-                    Isloaded = true;
-
-                    // Find the current MainWindow instance and close it
-                    var currentMainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-                    if (currentMainWindow != null)
+                    p.Show();
+                    FilterTable();
+                    CalculateCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                     {
-                        currentMainWindow.Close();
+                        Isloaded = true;
+
+                        // Lấy thông tin của item được truyền vào
+                        if (p is Dashboard item)
+                        {
+                            ExecuteCalculateCommand(item);
+                        }
+                    });
+
+                   //When user select status of table, filter table
+                   SelectionChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+                    {
+                        Isloaded = true;
+                        FilterTable();
                     }
+                      );
 
-                    // Execute the command
-                    ExecuteCalculateCommand(p);
-
-                    // Create and show a new instance of MainWindow
-                    MainWindow newMainWindow = new MainWindow();
-                    newMainWindow.Show();
-                });
-
-           
+                    
                     TurnOnCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
                     {
                         Isloaded = true;
-                        MainWindow wd = new MainWindow();
-                        wd.ShowDialog();
+                        if(p is Dashboard item)
+                        {
+                            ExecuteTurnOnCommand(item);
+                        }
                     }
               );
                 }
@@ -123,7 +154,7 @@ namespace BilliardManagement.ViewModels
             {
                 // Lấy booking đầu tiên nếu có, nếu không thì null
                 var booking = DataProvider.Instance.DB.Bookings
-                    .Where(x => x.TableId == item.TableId && x.Table.Status == "Occupied")
+                    .Where(x => x.TableId == item.TableId && x.Table.Status == "Occupied" && x.EndTime == null)
                     .FirstOrDefault();
 
                 if (booking != null)
@@ -141,7 +172,7 @@ namespace BilliardManagement.ViewModels
                     //Calculate total price equal current time - start time multiply hourly rate of table and calculate exactly minues
                     DateTime currentTime = DateTime.Now;
                     TimeSpan time = currentTime - booking.StartTime;
-                    totalPrice += (int)(time.TotalMinutes *(int) item.HourlyRate) / 60;
+                    totalPrice += (int)(time.TotalMinutes * (int)item.HourlyRate) / 60;
                     // Tạo đối tượng Table mới
                     Table table = new Table()
                     {
@@ -167,38 +198,156 @@ namespace BilliardManagement.ViewModels
                     };
                     Dashboard.Add(new Dashboard() { Table = table, totalPrice = 0 });
                 }
+                
             }
+            ExecuteTotalRevenueToday();
+            ExcuteTotalTableAvailable();
+            ExcuteTotalTableOccupied();
         }
-        private void ExecuteCalculateCommand(object parameter)
+        private void ExecuteCalculateCommand(Dashboard item)
         {
-            if (parameter is Dashboard item)
-            {
-                //Update total price
-                DateTime currentTime = DateTime.Now;
-                var booking = DataProvider.Instance.DB.Bookings
-                                .FirstOrDefault(x => x.TableId == item.Table.TableId && x.EndTime == null);
-                item.Table.Status = "Available";
 
-                if (booking != null)
+            //Save End Time and total Price to database
+            var booking = DataProvider.Instance.DB.Bookings
+                .Where(x => x.TableId == item.Table.TableId && x.Table.Status == "Occupied" && x.EndTime == null)
+                .FirstOrDefault();
+            booking.EndTime = DateTime.Now;
+            booking.TotalAmount = item.totalPrice;
+            DataProvider.Instance.DB.SaveChanges();
+            //Change status of table to Available and save to database
+            item.Table.Status = "Available";
+            Table TableItem = DataProvider.Instance.DB.Tables.FirstOrDefault(x => x.TableId == booking.TableId);
+            if (TableItem != null) TableItem.Status = "Available";
+            DataProvider.Instance.DB.SaveChanges();
+            loadDashboard();
+
+        }
+
+
+        private void ExecuteTurnOnCommand(Dashboard item)
+        {
+
+            item.Table.Status = "Occupied";
+            Table table = DataProvider.Instance.DB.Tables.FirstOrDefault(x => x.TableId == item.Table.TableId && x.Status=="Available");
+            if (table != null) table.Status = "Occupied";
+            var booking = new Booking()
+            {
+                TableId = item.Table.TableId,
+                StartTime = DateTime.Now,
+                EndTime = null,
+                TotalAmount = 0,
+                EmployeeId = User.Default.Id
+            };
+            DataProvider.Instance.DB.Bookings.Add(booking);
+            DataProvider.Instance.DB.SaveChanges();
+            loadDashboard();
+
+        }
+        public void ExecuteTotalRevenueToday()
+        {
+             TotalRevenueToday = 0;
+            //Count total amount of all booking today
+            var listBooking = DataProvider.Instance.DB.Bookings.ToList();
+            foreach (var item in listBooking)
+            {
+                if (item.StartTime.Date == DateTime.Now.Date)
                 {
-                    booking.SetEndTime(currentTime);
-                    DataProvider.Instance.DB.Bookings.Update(booking);
-                    DataProvider.Instance.DB.Tables.Update(item.Table);
-                    DataProvider.Instance.DB.SaveChanges();
+                    TotalRevenueToday += (int)item.TotalAmount;
+                }
+            }
+            //update bliding 
+
+            
+        }
+        public void ExcuteTotalTableAvailable()
+        {
+            int totalTable = 0;
+            var listTable = DataProvider.Instance.DB.Tables.ToList();
+            foreach (var item in listTable)
+            {
+                if (item.Status == "Available")
+                {
+                    totalTable++;
+                }
+            }
+            TotalTableAvailable = totalTable;
+        }
+        public void ExcuteTotalTableOccupied()
+        {
+            int totalTable = 0;
+            var listTable = DataProvider.Instance.DB.Tables.ToList();
+            foreach (var item in listTable)
+            {
+                if (item.Status == "Occupied")
+                {
+                    totalTable++;
+                }
+            }
+            TotalTableOccupied = totalTable;
+        }
+        public void FilterTable()
+        {
+            //split string SelectedStatus just All, Available,  to filter table
+            
+         string change = SelectedStatus.Contains("All") ? "All" : SelectedStatus.Contains("Available") ? "Available" : SelectedStatus.Contains("Occupied") ? "Occupied" : "Maintenance";
+
+            
+            if (change == "All")
+            {
+                loadDashboard();
+            }
+            else
+            {
+                Dashboard = new ObservableCollection<Dashboard>();
+                var listTable = DataProvider.Instance.DB.Tables.Where(x => x.Status == change).ToList();
+                foreach (var item in listTable)
+                {
+                    var booking = DataProvider.Instance.DB.Bookings
+                        .Where(x => x.TableId == item.TableId && x.Table.Status == "Occupied" && x.EndTime == null)
+                        .FirstOrDefault();
+
+                    if (booking != null)
+                    {
+                        int totalPrice = 0;
+                        var bookingDetails = DataProvider.Instance.DB.BookingDetails
+                            .Where(x => x.BookingId == booking.BookingId)
+                            .ToList();
+
+                        foreach (var item1 in bookingDetails)
+                        {
+                            totalPrice += (int)item1.UnitPrice;
+                        }
+                        DateTime currentTime = DateTime.Now;
+                        TimeSpan time = currentTime - booking.StartTime;
+                        totalPrice += (int)(time.TotalMinutes * (int)item.HourlyRate) / 60;
+
+                        Table table = new Table()
+                        {
+                            TableId = item.TableId,
+                            TableNumber = item.TableNumber,
+                            HourlyRate = item.HourlyRate,
+                            Status = item.Status,
+                            Bookings = item.Bookings
+                        };
+                        Dashboard.Add(new Dashboard() { Table = table, totalPrice = totalPrice });
+
+                    }
+                    else
+                    {
+                        Table table = new Table()
+                        {
+                            TableId = item.TableId,
+                            TableNumber = item.TableNumber,
+                            HourlyRate = item.HourlyRate,
+                            Status = item.Status,
+                            Bookings = item.Bookings
+                        };
+                        Dashboard.Add(new Dashboard() { Table = table, totalPrice = 0 });
+                    }
                 }
             }
         }
-
-
-        private void ExecuteTurnOnCommand(object parameter)
-        {
-            if (parameter is Dashboard item)
-            {
-                item.Table.Status = "Occupied";
-                item.totalPrice = 0; // Example: Reset total price or set as needed
-                MessageBox.Show($"Table {item.Table.TableNumber} status changed to Occupied");
-            }
-        }
+       
 
 
     }

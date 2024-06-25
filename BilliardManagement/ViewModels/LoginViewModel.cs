@@ -1,4 +1,5 @@
 ﻿using BilliardManagement.Models;
+using BilliardManagement.Properties;
 using BilliardManagement.Views;
 using System;
 using System.Collections.Generic;
@@ -43,19 +44,48 @@ namespace BilliardManagement.ViewModels
         void Login(Window p)
         {
            if(p==null) return;
-           var accountCount = DataProvider.Instance.DB.Employees.Where(x => x.Username == UserName && x.Password == Password).Count();
-            if(accountCount == 0)
+            Employee employee = new Employee();
+            employee = LoadEmployee();
+            if(employee != null)
+            {
+                MessageBox.Show("Đăng nhập thành công");
+                IsLogin = true;
+                p.Close();
+                employee.SaveEmployee(employee);
+            }
+            else { 
+            employee = DataProvider.Instance.DB.Employees.Where(x => x.Username == UserName && x.Password == Password).FirstOrDefault();
+            if(employee == null)
             {
                 MessageBox.Show("Sai tên tài khoản hoặc mật khẩu");
                 return;
             }
-            if(accountCount == 1) {
+            if(employee != null) {
                 MessageBox.Show("Đăng nhập thành công");
-                IsLogin = true;
+                IsLogin = true;               
                 p.Close();
+                employee.SaveEmployee(employee);
 
             }
-           
+            }
+
+
+
+
+
+
+
+        }
+        public Employee LoadEmployee()
+        {
+            if (User.Default.Id != 0) // Giả sử Id = 0 khi chưa có thông tin
+            {
+                
+                    Employee employee = DataProvider.Instance.DB.Employees.Where(x => x.EmployeeId == User.Default.Id).FirstOrDefault();
+                    return employee;
+               
+            }
+            return null;
         }
     }
 }

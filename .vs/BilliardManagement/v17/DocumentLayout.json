@@ -1,20 +1,7 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Source code FPT\\PRN212\\BilliardManagement\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\source code fpt\\prn212\\billiardmanagement\\billiardmanagement\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\source code fpt\\prn212\\billiardmanagement\\billiardmanagement\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|d:\\source code fpt\\prn212\\billiardmanagement\\billiardmanagement\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{99AFBF70-6525-43F1-A0FF-F9ED4F693AE0}|BilliardManagement\\BilliardManagement.csproj|solutionrelative:billiardmanagement\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    }
-  ],
+  "WorkspaceRootPath": "D:\\FPT Source\\Billiard Management\\BilliardManagement\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,45 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Booking.cs",
-              "DocumentMoniker": "D:\\Source code FPT\\PRN212\\BilliardManagement\\BilliardManagement\\Models\\Booking.cs",
-              "RelativeDocumentMoniker": "BilliardManagement\\Models\\Booking.cs",
-              "ToolTip": "D:\\Source code FPT\\PRN212\\BilliardManagement\\BilliardManagement\\Models\\Booking.cs",
-              "RelativeToolTip": "BilliardManagement\\Models\\Booking.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAEwBwAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T03:42:01.129Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "D:\\Source code FPT\\PRN212\\BilliardManagement\\BilliardManagement\\ViewModels\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "BilliardManagement\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "D:\\Source code FPT\\PRN212\\BilliardManagement\\BilliardManagement\\ViewModels\\MainViewModel.cs",
-              "RelativeToolTip": "BilliardManagement\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AQIAAKEAAAAAAAAAAAAswLkAAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-24T03:26:01.124Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\Source code FPT\\PRN212\\BilliardManagement\\BilliardManagement\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "BilliardManagement\\MainWindow.xaml",
-              "ToolTip": "D:\\Source code FPT\\PRN212\\BilliardManagement\\BilliardManagement\\MainWindow.xaml",
-              "RelativeToolTip": "BilliardManagement\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-24T03:15:45.322Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }
