@@ -117,6 +117,7 @@
                     <Grid Grid.Column="0"></Grid>
                     <Grid Grid.Column="1">
                         <ComboBox
+                            Text="{Binding SearchTable,UpdateSourceTrigger=PropertyChanged}"
  materialDesign:ComboBoxAssist.MaxLength="2"
  materialDesign:HintAssist.Hint="Search"
  materialDesign:HintAssist.HintOpacity=".26"

@@ -34,6 +34,8 @@ namespace BilliardManagement.ViewModels
         public int TotalTableOccupied { get => _totalTableOccupied; set { _totalTableOccupied = value; OnPropertyChanged(); } }
         private string _selectedStatus { get; set; }
         public string SelectedStatus { get => _selectedStatus; set { _selectedStatus = value; OnPropertyChanged(); FilterTable(); } }
+        private string _SearchTable { get; set; }
+        public string SearchTable { get => _SearchTable; set { _SearchTable = value; OnPropertyChanged(); FilterTable(); } }
         private DispatcherTimer _timer;
 
 
@@ -106,8 +108,9 @@ namespace BilliardManagement.ViewModels
                     p.Close();
             }
               );
-            LoadedEmployee = new RelayCommand<object>((p) => { return true; }, (p) =>
+            LoadedEmployee = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+                //Close current window and open EmployeeWindow 
                 Isloaded = true;
                 ManagerEmployeeWindow wd = new ManagerEmployeeWindow();
                 wd.ShowDialog();
@@ -291,14 +294,14 @@ namespace BilliardManagement.ViewModels
             
          string change = SelectedStatus.Contains("All") ? "All" : SelectedStatus.Contains("Available") ? "Available" : SelectedStatus.Contains("Occupied") ? "Occupied" : "Maintenance";
 
-            
+            Dashboard = new ObservableCollection<Dashboard>();
             if (change == "All")
             {
                 loadDashboard();
             }
             else
             {
-                Dashboard = new ObservableCollection<Dashboard>();
+               
                 var listTable = DataProvider.Instance.DB.Tables.Where(x => x.Status == change).ToList();
                 foreach (var item in listTable)
                 {
@@ -346,6 +349,12 @@ namespace BilliardManagement.ViewModels
                     }
                 }
             }
+            //Search table by table number
+            if (SearchTable != null)
+            {
+                Dashboard = new ObservableCollection<Dashboard>(Dashboard.Where(x => x.Table.TableNumber.ToString().Contains(SearchTable)));
+            }
+           
         }
        
 

@@ -4,6 +4,7 @@
    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    xmlns:local="clr-namespace:BilliardManagement"
+   xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
    mc:Ignorable="d"
          xmlns:uc="clr-namespace:BilliardManagement.Views"
    Style="{StaticResource MaterialDesignWindow}"
@@ -16,7 +17,7 @@ TextOptions.TextFormattingMode="Ideal"
 TextOptions.TextRenderingMode="Auto"
 Background="{DynamicResource MaterialDesignPaper}"
 FontFamily="{DynamicResource MaterialDesignFont}"
-DataContext="{StaticResource MainVM}"
+DataContext="{StaticResource EmployeeVM}"
    >
     <Grid>
         <Grid>
@@ -27,25 +28,31 @@ DataContext="{StaticResource MainVM}"
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <!--Menu-->
-            <Grid Grid.Row="0">
+            <!--<Grid Grid.Row="0">
                 <uc:MenuControll></uc:MenuControll>
-            </Grid>
+            </Grid>-->
 
             <!--các element binding từ selected item-->
             <materialDesign:Card Grid.Row="1" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
-                    <TextBox Text="{Binding DisplayUserName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="UserName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <PasswordBox  Margin="5 5 15 5" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                    <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="UserName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <PasswordBox Margin="5 5 15 5" x:Name="FloatingPasswordBox"
+             materialDesign:HintAssist.Hint="Password"
+             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand,UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=FloatingPasswordBox,UpdateSourceTrigger=PropertyChanged}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
                     <TextBox Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Full Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="PhoneNumber" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="PhoneNumber" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <ComboBox  SelectedItem="{Binding SelectedRole, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Role" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
-                        <ComboBoxItem
-    Content="Admin" />
-                        <ComboBoxItem
-    Content="Staff" />
-                       
-                    </ComboBox>
+                    <ComboBox ItemsSource="{Binding Roles}"
+                  SelectedItem="{Binding TestingRole, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Margin="5 5 15 5"
+                  materialDesign:HintAssist.Hint="Role"
+                  Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                 </WrapPanel>
             </materialDesign:Card>
 
@@ -59,15 +66,15 @@ DataContext="{StaticResource MainVM}"
 
             <materialDesign:Card Grid.Row="3" Margin="5" VerticalAlignment="Stretch">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView HorizontalAlignment="Center" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Width="auto" Header="UserName" DisplayMemberBinding="{Binding DisplayUserName}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding EmployeeId}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="UserName" DisplayMemberBinding="{Binding Username}"></GridViewColumn>
                                 <GridViewColumn Width="120" Header="FullName" DisplayMemberBinding="{Binding FullName}"></GridViewColumn>
-                                <GridViewColumn Width="200" Header="Phone Number" DisplayMemberBinding="{Binding Phone}"></GridViewColumn>
+                                <GridViewColumn Width="200" Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}"></GridViewColumn>
                                 <GridViewColumn Width="auto" Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
-                                <GridViewColumn Width="auto" Header="Role" DisplayMemberBinding="{Binding SelectedRole}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="Role" DisplayMemberBinding="{Binding Role}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
