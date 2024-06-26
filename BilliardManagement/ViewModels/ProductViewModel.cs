@@ -64,6 +64,7 @@ namespace BilliardManagement.ViewModels
                 DataProvider.Instance.DB.Products.Add(product);
                 DataProvider.Instance.DB.SaveChanges();
                 List.Add(product);
+                new OrderViewModel().loadListTable();
             }
               );
             EditCommand = new RelayCommand<object>((p) =>
@@ -84,6 +85,8 @@ namespace BilliardManagement.ViewModels
                 SelectedItem.Price = Price;
                 SelectedItem.Description = Description;
                 List = new ObservableCollection<Product>(DataProvider.Instance.DB.Products);
+                
+                new OrderViewModel().loadListTable();
 
             }
               );
@@ -97,6 +100,8 @@ namespace BilliardManagement.ViewModels
                 DataProvider.Instance.DB.Products.Remove(product);
                 DataProvider.Instance.DB.SaveChanges();
                 List.Remove(product);
+                OrderViewModel orderViewModel = new OrderViewModel();
+                new OrderViewModel().loadListTable();
             }
               );
 

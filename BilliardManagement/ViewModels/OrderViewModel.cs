@@ -27,7 +27,7 @@ namespace BilliardManagement.ViewModels
         private ObservableCollection<Table> _ListTable;
         public ObservableCollection<Table> ListTable { get => _ListTable; set { _ListTable = value;OnPropertyChanged(); } }
         private ObservableCollection<Product> _ListProduct;
-        public ObservableCollection<Product> ListProduct { get => _ListProduct; set { _ListProduct = value; OnPropertyChanged(); } }
+        public ObservableCollection<Product> ListProduct { get => _ListProduct; set { _ListProduct = value; OnPropertyChanged();  } }
         private Table _SelectedTable;
         public Table SelectedTable { get => _SelectedTable; set { _SelectedTable = value;OnPropertyChanged(); } }
         private Product _SelectedProduct;
@@ -44,9 +44,15 @@ namespace BilliardManagement.ViewModels
                     Price = SelectedItem.Product.Price;
                 }
                 OnPropertyChanged(); } }
+ 
+
+        public void loadListTable() {
+            ListTable = new ObservableCollection<Table>(DataProvider.Instance.DB.Tables);
+            ListProduct = new ObservableCollection<Product>(DataProvider.Instance.DB.Products);
+        }
         public OrderViewModel() {
             List = new ObservableCollection<BookingDetail>(DataProvider.Instance.DB.BookingDetails);
-            ListTable= new ObservableCollection<Table>(DataProvider.Instance.DB.Tables.Where(x => x.Status == "Available"));
+            ListTable = new ObservableCollection<Table>(DataProvider.Instance.DB.Tables);
             ListProduct = new ObservableCollection<Product>(DataProvider.Instance.DB.Products);
             AddCommand = new RelayCommand<object>((p) =>
             {
@@ -67,6 +73,34 @@ namespace BilliardManagement.ViewModels
                 DataProvider.Instance.DB.Add(bookingDetail);
                 DataProvider.Instance.DB.SaveChanges();
                 List.Add(bookingDetail);
+            });
+            EditCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedTable == null || SelectedProduct == null || SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                var bookingDetail = DataProvider.Instance.DB.BookingDetails.Where(x => x.BookingDetailId == SelectedItem.BookingDetailId).FirstOrDefault();
+                bookingDetail.Product = SelectedProduct;
+                bookingDetail.UnitPrice = SelectedProduct.Price;
+                bookingDetail.Quantity = Quantity;
+                DataProvider.Instance.DB.SaveChanges();
+                SelectedItem.Product = SelectedProduct;
+                SelectedItem.Quantity = Quantity;
+                List = new ObservableCollection<BookingDetail>(DataProvider.Instance.DB.BookingDetails);
+            });
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                    return false;
+                return true;
+            }, (p) =>
+            {
+                var bookingDetail = DataProvider.Instance.DB.BookingDetails.Where(x => x.BookingDetailId == SelectedItem.BookingDetailId).FirstOrDefault();
+                DataProvider.Instance.DB.BookingDetails.Remove(bookingDetail);
+                DataProvider.Instance.DB.SaveChanges();
+                List.Remove(bookingDetail);
             });
 
         }

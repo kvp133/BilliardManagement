@@ -70,6 +70,7 @@ namespace BilliardManagement.ViewModels
                 DataProvider.Instance.DB.Tables.Add(table);
                 DataProvider.Instance.DB.SaveChanges();
                 List.Add(table);
+                
             });
             EditCommand = new RelayCommand<object>((p) =>
             {
@@ -88,6 +89,8 @@ namespace BilliardManagement.ViewModels
             SelectedItem.TableNumber = int.Parse(TableNumber);
                 SelectedItem.HourlyRate = decimal.Parse(HourlyRate);
                 List = new ObservableCollection<Table>(DataProvider.Instance.DB.Tables);
+                OrderViewModel orderViewModel = new OrderViewModel();
+                orderViewModel.loadListTable();
             });
             DeleteCommand = new RelayCommand<object>((p) =>
             {
@@ -101,6 +104,8 @@ namespace BilliardManagement.ViewModels
                 DataProvider.Instance.DB.Tables.Remove(table);
                 DataProvider.Instance.DB.SaveChanges();
                 List.Remove(table);
+                OrderViewModel orderViewModel = new OrderViewModel();
+                orderViewModel.loadListTable();
             });
         
         }

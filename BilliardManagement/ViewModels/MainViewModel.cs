@@ -84,6 +84,7 @@ namespace BilliardManagement.ViewModels
                             ExecuteCalculateCommand(item);
                         }
                         OrderViewModel wd = new OrderViewModel();
+                       
 
                     });
 
@@ -121,9 +122,15 @@ namespace BilliardManagement.ViewModels
               );
             LoadedProduct = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                //Mỗi khi mở cửa sổ, kiểm tra xem đã load chưa, nếu chưa thì load
+
                 Isloaded = true;
                 ManagerProductWindow wd = new ManagerProductWindow();
-                wd.ShowDialog();
+                wd.ShowDialog(); 
+         
+     
+
+
             }
               );
             LoadedTable = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -131,12 +138,15 @@ namespace BilliardManagement.ViewModels
                 Isloaded = true;
                 TableWindow wd = new TableWindow();
                 wd.ShowDialog();
+
             }
               );
             LoadedOrders = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 Isloaded = true;
-                OrderWindow wd = new OrderWindow();
+                OrderWindow wd = new OrderWindow(); 
+                OrderViewModel orderViewModel = new OrderViewModel();
+                wd.DataContext = orderViewModel;
                 wd.ShowDialog();
             }
               );
@@ -144,6 +154,7 @@ namespace BilliardManagement.ViewModels
             {
                 Isloaded = true;
                 MainWindow wd = new MainWindow();
+
                 wd.ShowDialog();
             }
               );

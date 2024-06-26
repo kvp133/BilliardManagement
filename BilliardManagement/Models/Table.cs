@@ -1,17 +1,22 @@
-﻿using System;
+﻿using BilliardManagement.ViewModels;
+using System;
 using System.Collections.Generic;
 
 namespace BilliardManagement.Models;
 
-public partial class Table
+public partial class Table:BaseViewModel
 {
-    public int TableId { get; set; }
+    private int _tableId;
+    public int TableId { get => _tableId; set { _tableId = value; OnPropertyChanged(); } }
 
-    public int TableNumber { get; set; }
+    private int _tableNumber;
+    public int TableNumber { get => _tableNumber; set { _tableNumber = value; OnPropertyChanged(); } }
+    
+    private decimal _hourlyRate;
+    public decimal HourlyRate { get => _hourlyRate; set { _hourlyRate = value; OnPropertyChanged(); } }
 
-    public decimal HourlyRate { get; set; }
-
-    public string Status { get; set; } = null!;
+    private string _status;
+    public string Status { get => _status; set { _status = value; OnPropertyChanged(); } }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }
