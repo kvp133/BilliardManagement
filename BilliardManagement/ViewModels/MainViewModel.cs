@@ -83,6 +83,8 @@ namespace BilliardManagement.ViewModels
                         {
                             ExecuteCalculateCommand(item);
                         }
+                        OrderViewModel wd = new OrderViewModel();
+
                     });
 
                    //When user select status of table, filter table
@@ -101,6 +103,7 @@ namespace BilliardManagement.ViewModels
                         {
                             ExecuteTurnOnCommand(item);
                         }
+                        OrderViewModel wd = new OrderViewModel();
                     }
               );
                 }
@@ -170,7 +173,7 @@ namespace BilliardManagement.ViewModels
 
                     foreach (var item1 in bookingDetails)
                     {
-                        totalPrice += (int)item1.UnitPrice;
+                        totalPrice += (int)item1.UnitPrice*item1.Quantity;
                     }
                     //Calculate total price equal current time - start time multiply hourly rate of table and calculate exactly minues
                     DateTime currentTime = DateTime.Now;

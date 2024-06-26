@@ -13,10 +13,11 @@ TextElement.Foreground="{DynamicResource MaterialDesignBody}"
 TextElement.FontWeight="Regular"
 TextElement.FontSize="13"
 TextOptions.TextFormattingMode="Ideal"
+        WindowStartupLocation="CenterScreen"
 TextOptions.TextRenderingMode="Auto"
 Background="{DynamicResource MaterialDesignPaper}"
 FontFamily="{DynamicResource MaterialDesignFont}"
-DataContext="{StaticResource MainVM}">
+DataContext="{StaticResource OrderVM}">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -26,35 +27,45 @@ DataContext="{StaticResource MainVM}">
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <!--Menu-->
-            <Grid Grid.Row="0">
+            <!--<Grid Grid.Row="0">
                 <uc:MenuControll></uc:MenuControll>
-            </Grid>
+            </Grid>-->
 
             <!--các element binding từ selected item-->
             <materialDesign:Card Grid.Row="1" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
-                    <ComboBox  SelectedItem="{Binding SelectedTable, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Table" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
-                        <ComboBoxItem>
-                            <ComboBoxItem.Content>
+                    <ComboBox ItemsSource="{Binding ListTable, UpdateSourceTrigger=PropertyChanged}" 
+          SelectedItem="{Binding SelectedTable, Mode=TwoWay}" 
+          Margin="5 5 15 5" 
+          materialDesign:HintAssist.Hint="Table" 
+          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding TableNumber}"></TextBlock>
                                     <TextBlock Text=" - "></TextBlock>
                                     <TextBlock Text="{Binding Status}"></TextBlock>
                                 </StackPanel>
-                            </ComboBoxItem.Content>
-                        </ComboBoxItem>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <ComboBox  SelectedItem="{Binding SelectedProduct, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Product" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
-                        <ComboBoxItem>
-                            <ComboBoxItem.Content>
+
+                    <ComboBox ItemsSource="{Binding ListProduct, UpdateSourceTrigger=PropertyChanged}" 
+          SelectedItem="{Binding SelectedProduct, Mode=TwoWay}" 
+          Margin="5 5 15 5" 
+          materialDesign:HintAssist.Hint="Product" 
+          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding ProductName}"></TextBlock>
                                     <TextBlock Text=" - "></TextBlock>
                                     <TextBlock Text="{Binding Price}"></TextBlock>
                                 </StackPanel>
-                            </ComboBoxItem.Content>
-                        </ComboBoxItem>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
+
                     <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Quantity" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </WrapPanel>
                 
@@ -76,10 +87,11 @@ DataContext="{StaticResource MainVM}">
                     <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Width="200" Header="Table" DisplayMemberBinding="{Binding TableNumber}"></GridViewColumn>
-                                <GridViewColumn Width="120" Header="Product" DisplayMemberBinding="{Binding ProductName}"></GridViewColumn>
-                                <GridViewColumn Width="200" Header="Price" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                <GridViewColumn Width="auto" Header="Id" DisplayMemberBinding="{Binding BookingDetailId}"></GridViewColumn>
+                                <GridViewColumn Width="100"  Header="Order Id" DisplayMemberBinding="{Binding Booking.BookingId}"></GridViewColumn>
+                                <GridViewColumn Width="200"  Header="Table" DisplayMemberBinding="{Binding Booking.Table.TableNumber}"></GridViewColumn>
+                                <GridViewColumn Width="120" Header="Product" DisplayMemberBinding="{Binding Product.ProductName}"></GridViewColumn>
+                                <GridViewColumn Width="200" Header="Price" DisplayMemberBinding="{Binding Product.Price}"></GridViewColumn>
                                 <GridViewColumn Width="auto" Header="Quantity" DisplayMemberBinding="{Binding Quantity}"></GridViewColumn>
                                 
                             </GridView>

@@ -327,3 +327,4 @@ D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\obj\Debug\net8.0
 D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\obj\Debug\net8.0-windows\ref\BilliardManagement.dll
 D:\FPT Source\Billiard Management\BilliardManagement\BilliardManagement\obj\Debug\net8.0-windows\BilliardManagement.sourcelink.json
 D:\FPT Source\Billiard Management\BilliardManagement\BilliardManagement\bin\Debug\net8.0-windows\BilliardManagement.dll.config
+D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\bin\Debug\net8.0-windows\BilliardManagement.dll.config
