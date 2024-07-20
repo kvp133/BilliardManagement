@@ -23,5 +23,7 @@ namespace BilliardManagement.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

@@ -44,7 +44,8 @@ namespace BilliardManagement.ViewModels
                     Price = SelectedItem.Product.Price;
                 }
                 OnPropertyChanged(); } }
- 
+        private string _SearchTable { get; set; }
+        public string SearchTable { get => _SearchTable; set { _SearchTable = value; OnPropertyChanged(); FilterTable(); } }
 
         public void loadListTable() {
             ListTable = new ObservableCollection<Table>(DataProvider.Instance.DB.Tables);
@@ -103,6 +104,13 @@ namespace BilliardManagement.ViewModels
                 List.Remove(bookingDetail);
             });
 
+        }
+        public void FilterTable()
+        {
+            if (SearchTable != null)
+            {
+                List = new ObservableCollection<BookingDetail>(DataProvider.Instance.DB.BookingDetails.Where(x => x.Booking.Table.TableNumber.ToString().Contains(SearchTable)));
+            }
         }
 
 

@@ -22,7 +22,7 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+              
             </Grid.ColumnDefinitions>
             <Button Command="{Binding LoadedEmployee}" Grid.Column="0" ToolTip="Add Employees">
                 <Grid>
@@ -66,20 +66,8 @@
                     </Grid>
                 </Grid>
             </Button>
-            <Button Command="{Binding LoadedHome}" Grid.Column="3" ToolTip="Dashboard">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <TextBlock Text="Dashboard" HorizontalAlignment="Center"></TextBlock>
-                    </Grid>
-                    <Grid Grid.Row="1">
-                        <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="ViewDashboard" />
-                    </Grid>
-                </Grid>
-            </Button>
+            
+          
             <Button Command="{Binding LoadedOrders}" Grid.Column="4" ToolTip="Orders">
                 <Grid>
                     <Grid.RowDefinitions>

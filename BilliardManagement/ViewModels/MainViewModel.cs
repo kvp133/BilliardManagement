@@ -84,7 +84,8 @@ namespace BilliardManagement.ViewModels
                             ExecuteCalculateCommand(item);
                         }
                         OrderViewModel wd = new OrderViewModel();
-                       
+                        loadDashboard();
+
 
                     });
 
@@ -105,6 +106,7 @@ namespace BilliardManagement.ViewModels
                             ExecuteTurnOnCommand(item);
                         }
                         OrderViewModel wd = new OrderViewModel();
+                        loadDashboard();
                     }
               );
                 }
@@ -150,14 +152,7 @@ namespace BilliardManagement.ViewModels
                 wd.ShowDialog();
             }
               );
-            LoadedHome = new RelayCommand<object>((p) => { return true; }, (p) =>
-            {
-                Isloaded = true;
-                MainWindow wd = new MainWindow();
-
-                wd.ShowDialog();
-            }
-              );
+          
 
 
         }
@@ -228,6 +223,19 @@ namespace BilliardManagement.ViewModels
             var booking = DataProvider.Instance.DB.Bookings
                 .Where(x => x.TableId == item.Table.TableId && x.Table.Status == "Occupied" && x.EndTime == null)
                 .FirstOrDefault();
+            List<BookingDetail> abc;
+            abc = DataProvider.Instance.DB.BookingDetails.Where(x => x.Booking.EndTime == null && x.Booking.Table == item.Table).ToList();
+            //Show Box Message with Total time and total order
+            string dataMess = "San pham: \n";
+            foreach(BookingDetail items in abc)
+            {
+                dataMess += (items.Product.ProductName + " Quanlity: " + items.Quantity + "\n");
+
+            }
+            DateTime currentTime = DateTime.Now;
+            TimeSpan time = currentTime - booking.StartTime;
+            dataMess += ("\n Total Time: "+ time.TotalHours + "\n Total price: "+item.totalPrice);
+            
             booking.EndTime = DateTime.Now;
             booking.TotalAmount = item.totalPrice;
             DataProvider.Instance.DB.SaveChanges();
@@ -236,6 +244,7 @@ namespace BilliardManagement.ViewModels
             Table TableItem = DataProvider.Instance.DB.Tables.FirstOrDefault(x => x.TableId == booking.TableId);
             if (TableItem != null) TableItem.Status = "Available";
             DataProvider.Instance.DB.SaveChanges();
+            MessageBox.Show(dataMess);
             loadDashboard();
 
         }

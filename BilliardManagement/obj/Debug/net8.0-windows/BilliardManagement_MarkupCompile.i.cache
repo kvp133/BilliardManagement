@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\FPT Source\Billiard Management\BilliardManagement\BilliardManagement\obj\Debug\net8.0-windows\
+D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\obj\Debug\net8.0-windows\
 BilliardManagement
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-D:\FPT Source\Billiard Management\BilliardManagement\BilliardManagement\App.xaml
-91843231110
+D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\App.xaml
+10-1890629599
 
-30-1720235202
-250-758252044
-MainWindow.xaml;ResourceXAML\MainResource.xaml;Views\DashboardWindow.xaml;Views\LoginWindow.xaml;Views\ManagerEmployeeWindow.xaml;Views\ManagerProductWindow.xaml;Views\MenuControll.xaml;Views\OrderWindow.xaml;Views\TableWindow.xaml;
+31887166772
+250-239536155
+MainWindow.xaml;ResourceXAML\MainResource.xaml;Views\DashboardWindow.xaml;Views\LoginWindow.xaml;Views\ManagerEmployeeWindow.xaml;Views\ManagerProductWindow.xaml;Views\MenuControll.xaml;Views\OrderWindow.xaml;Views\SearchBox.xaml;Views\TableWindow.xaml;
 
 True
 

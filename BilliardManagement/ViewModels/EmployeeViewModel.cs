@@ -33,6 +33,8 @@ namespace BilliardManagement.ViewModels
         public string Password { get => _password; set { _password = value; OnPropertyChanged(); } }
         public string _TesitngRole;
         public string TestingRole { get => _TesitngRole; set { _TesitngRole = value; OnPropertyChanged(); } }
+        private string _SearchTable { get; set; }
+        public string SearchTable { get => _SearchTable; set { _SearchTable = value; OnPropertyChanged(); FilterTable(); } }
         private ObservableCollection<string> _roles;
         public ObservableCollection<string> Roles
         {
@@ -148,6 +150,13 @@ namespace BilliardManagement.ViewModels
              );
 
 
+        }
+        public void FilterTable()
+        {
+            if (SearchTable != null)
+            {
+                List = new ObservableCollection<Employee>(DataProvider.Instance.DB.Employees.Where(x => x.FullName.ToString().Contains(SearchTable)));
+            }
         }
     }
    

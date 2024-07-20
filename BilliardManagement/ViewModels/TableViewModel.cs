@@ -26,6 +26,8 @@ namespace BilliardManagement.ViewModels
         public string SearchText { get => _SearchText; set { _SearchText = value; OnPropertyChanged(); } }
         private string _StatusSelected;
         public string StatusSelected { get => _StatusSelected; set { _StatusSelected = value; OnPropertyChanged(); } }
+        private string _SearchTable { get; set; }
+        public string SearchTable { get => _SearchTable; set { _SearchTable = value; OnPropertyChanged(); FilterTable(); } }
         private ObservableCollection<string> _ListStatus;
         public ObservableCollection<string> ListStatus
         {
@@ -109,5 +111,12 @@ namespace BilliardManagement.ViewModels
             });
         
         }
-    }
+        public void FilterTable()
+        {           
+            if(SearchTable != null)
+            {
+                List = new ObservableCollection<Table>(DataProvider.Instance.DB.Tables.Where(x => x.TableNumber.ToString().Contains(SearchTable)));
+            }
+        }
+        }
 }

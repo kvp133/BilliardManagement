@@ -1,0 +1,20 @@
+﻿BilliardManagement
+
+
+winexe
+C#
+.cs
+D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\obj\Release\net8.0-windows\
+BilliardManagement
+none
+false
+TRACE;RELEASE;NET;NET8_0;NETCOREAPP
+D:\Source code FPT\PRN212\BilliardManagement\BilliardManagement\App.xaml
+91843231110
+
+28-24140851
+250-239536155
+MainWindow.xaml;ResourceXAML\MainResource.xaml;Views\DashboardWindow.xaml;Views\LoginWindow.xaml;Views\ManagerEmployeeWindow.xaml;Views\ManagerProductWindow.xaml;Views\MenuControll.xaml;Views\OrderWindow.xaml;Views\TableWindow.xaml;
+
+False
+
